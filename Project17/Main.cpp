@@ -1,6 +1,6 @@
 #include"Header.h"
-void tempest(Turell tur) {
-    tur.shot(tur);
+void tempest(Turell tur, vector<vector<char>> vec) {
+    tur.shot(tur, vec, tur);
 }
 int main() {
     Box b;
@@ -21,7 +21,7 @@ int main() {
     COORD boxcursCoord{ b.Y,b.X };
     SetConsoleCursorPosition(hand, pl.PlayerCoord);
     tn.gelocation(tn, vec);
-    thread th(tempest, turell);
+    thread th(tempest, turell, vec);
     th.detach();
     while (true)
     {

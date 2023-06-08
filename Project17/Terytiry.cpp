@@ -26,10 +26,20 @@ void vecRead(vector<vector <char>> vec, Turell& turell) {
                 
             }
             else if (vec[i][f] == '}') {
+                pair<COORD, bool> tempBulet;
                 short iss = f;
-                turell.coord_Turell = { --iss,i  };
-                turell.coord_bulet_turell = {--iss,i };
+                tempBulet.first = { --iss, i };
+                tempBulet.second = false;
+                turell.coord_bulet_turell.push_back(tempBulet);
                 cout << char(184);
+            }
+            else if (vec[i][f] == '{') {
+                pair<COORD, bool> tempBulet;
+                short iss = f;
+                tempBulet.first = { ++iss, i };
+                tempBulet.second = true;
+                turell.coord_bulet_turell.push_back(tempBulet);
+                cout << char(213);
             }
             else if(vec[i][f]== '#'|| vec[i][f]== ' ') {
                 cout << vec[i][f];

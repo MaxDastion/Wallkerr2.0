@@ -77,10 +77,9 @@ class Turell {
 public:
 	char char_turel = char(201);
 	COORD coord_Turell;
-	bool direction_turell = false;//false = left; true = right
 	char char_bulet_turell = char(248);
-	COORD coord_bulet_turell;
-	void shot(Turell turell);
+	vector <pair<COORD, bool>> coord_bulet_turell;
+	void shot(Turell turell, vector<vector<char>> vec, Turell turelli);
 	void ToDie();
 	
 };

@@ -1,25 +1,58 @@
 #include"Header.h"
-void Turell::shot(Turell turell) {
+void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli) {
 	
 	while (true)
 	{
-		if (turell.direction_turell == false) {
+		for (size_t i = 0; i < turell.coord_bulet_turell.size(); i++)
+		{
 			
-			
-			Sleep(100);
-			SetConsoleCursorPosition(hand, turell.coord_bulet_turell);
-			turell.coord_bulet_turell.X--;
-			cout << turell.char_bulet_turell;
+			if (turell.coord_bulet_turell[i].second == false) {
 
-			cout << ' ';
-			if (turell.coord_bulet_turell.X == 0) {
-				short x = turell.coord_Turell.X;
-				turell.coord_bulet_turell.X = --x;
-				SetConsoleCursorPosition(hand, { 1, turell.coord_bulet_turell.Y });
-				cout << ' ';
-			}
+  				Sleep(50);
 			
+				--turell.coord_bulet_turell[i].first.X;
+				if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X] == '#') {
+					
+					SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X+1, turell.coord_bulet_turell[i].first.Y});
+					cout << ' ';
+					SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
+					turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X-1;
+				}
+				
+				SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+				cout << turell.char_bulet_turell;
+
+				cout << ' ';
+				
+
+			}
+			if (turell.coord_bulet_turell[i].second == true) {
+
+  				Sleep(50);
+			
+				++turell.coord_bulet_turell[i].first.X;
+				SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+				if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X+1] == '#') {
+					
+					SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X-1, turell.coord_bulet_turell[i].first.Y});
+					cout << ' ';
+					cout << ' ';
+					SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
+					turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X+1;
+				}
+				
+				
+				
+				cout << ' ';
+				cout << turell.char_bulet_turell;
+				
+
+				
+				
+
+			}
 		}
+		
 	}
 	
 } 
