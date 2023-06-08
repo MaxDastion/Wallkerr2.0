@@ -81,6 +81,7 @@ public:
 	char char_bulet_turell = char(248);
 	COORD coord_bulet_turell;
 	void shot(Turell turell);
+	void ToDie();
 	
 };
 

@@ -23,5 +23,12 @@ void Turell::shot(Turell turell) {
 	}
 	
 } 
-void  Turell::ToDie{
+void  Turell::ToDie(){
+	cout << " sf"; 
+	cout << " sf"; 
+	cout << " sf"; 
+	cout << " sf"; 
+	cout << " sf"; 
+
+
 }
