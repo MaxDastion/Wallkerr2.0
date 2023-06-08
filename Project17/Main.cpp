@@ -1,6 +1,6 @@
 #include"Header.h"
-void tempest(Turell tur, vector<vector<char>> vec) {
-    tur.shot(tur, vec, tur);
+void tempest(Turell tur, vector<vector<char>> vec, Player* pl) {
+    tur.shot(tur, vec, tur, *pl);
 }
 int main() {
     Box b;
@@ -21,13 +21,13 @@ int main() {
     COORD boxcursCoord{ b.Y,b.X };
     SetConsoleCursorPosition(hand, pl.PlayerCoord);
     tn.gelocation(tn, vec);
-    thread th(tempest, turell, vec);
+    thread th(tempest, turell, vec,&pl);
     th.detach();
     while (true)
     {
    
         if (_kbhit()) {
-           
+            pl.ItPl.first = 1;
             SetConsoleCursorPosition(hand, tn.TocenCOOrd);
             SetConsoleTextAttribute(hand, Yellow);
             cout << tn.tocenchar;
@@ -52,6 +52,11 @@ int main() {
                     break;
                 }
             }
+        }
+        if (pl.ItPl.second == 0) {
+            Sleep(500);
+            break;
+
         }
        
     }

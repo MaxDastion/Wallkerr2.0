@@ -1,5 +1,5 @@
 #include"Header.h"
-void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli) {
+void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl) {
 	
 	while (true)
 	{
@@ -51,17 +51,33 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli) {
 				
 
 			}
+
+		}
+
+		turell.ToDie(pl, turell);
+		if (pl.ItPl.second == 0) {
+			system("cls");
+			SetConsoleTextAttribute(hand, Purple);
+			cout << "You die";
+			Sleep(500);
+			break;
 		}
 		
 	}
 	
 } 
-void  Turell::ToDie(){
-	cout << " sf"; 
-	cout << " sf"; 
-	cout << " sf"; 
-	cout << " sf"; 
-	cout << " sf"; 
+void  Turell::ToDie(Player& pl, Turell tl) {
+	if (pl.ItPl.first) {
+		for (size_t i = 0; i < tl.coord_bulet_turell.size(); i++)
+		{
+			if (pl.PlayerCoord.Y == tl.coord_bulet_turell[i].first.Y && pl.PlayerCoord.X == tl.coord_bulet_turell[i].first.X) {
+				
+				pl.ItPl.second = 0;
+				
 
+			}
+		}
+		
+	}
 
 }

@@ -69,6 +69,7 @@ class Player {
 public:
 	COORD PlayerCoord{ 10,10 };
 	char charpl = '@';
+	pair<bool, bool> ItPl{0,1};
 
 };
 
@@ -79,8 +80,8 @@ public:
 	COORD coord_Turell;
 	char char_bulet_turell = char(248);
 	vector <pair<COORD, bool>> coord_bulet_turell;
-	void shot(Turell turell, vector<vector<char>> vec, Turell turelli);
-	void ToDie();
+	void shot(Turell turell, vector<vector<char>> vec, Turell turelli, Player& pl);
+	void ToDie(Player& pl, Turell tl);
 	
 };
 
