@@ -34,7 +34,7 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="HP.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

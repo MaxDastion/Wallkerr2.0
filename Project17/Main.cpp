@@ -1,33 +1,33 @@
 #include"Header.h"
-void tempest(Turell tur, vector<vector<char>> vec, Player* pl) {
-    tur.shot(tur, vec, tur, *pl);
+void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp) {
+    tur.shot(tur, vec, tur, *pl, *hp);
 }
 int main() {
     Box b;
-    //Wall wa;
     Turell turell;
     Player pl;
     Tocen tn;
+    HealPoint hp;
     srand(time(NULL));
     tn.WhyNeedToken(tn);
     vector<vector <char>> vec;
- //   wa.wallCreat(vec, wa, wa);
     vecFILL(vec);
-   
     char box = char(219);
     
-    vecRead(vec, turell);
+    vecRead(vec, turell, hp);
     
     COORD boxcursCoord{ b.Y,b.X };
     SetConsoleCursorPosition(hand, pl.PlayerCoord);
     tn.gelocation(tn, vec);
-    thread th(tempest, turell, vec,&pl);
+    thread th(tempest, turell, vec,&pl, &hp);
     th.detach();
+
     while (true)
     {
    
         if (_kbhit()) {
             pl.ItPl.first = 1;
+
             SetConsoleCursorPosition(hand, tn.TocenCOOrd);
             SetConsoleTextAttribute(hand, Yellow);
             cout << tn.tocenchar;

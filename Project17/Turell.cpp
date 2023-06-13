@@ -1,8 +1,9 @@
 #include"Header.h"
-void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl) {
+void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl, HealPoint& hp) {
 	
 	while (true)
 	{
+		hp.Redering_HP(hp);
 		for (size_t i = 0; i < turell.coord_bulet_turell.size(); i++)
 		{
 			
@@ -20,6 +21,8 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 				}
 				
 				SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+
+				SetConsoleTextAttribute(hand, White);
 				cout << turell.char_bulet_turell;
 
 				cout << ' ';
@@ -42,7 +45,7 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 				}
 				
 				
-				
+				SetConsoleTextAttribute(hand, White);
 				cout << ' ';
 				cout << turell.char_bulet_turell;
 				
@@ -54,7 +57,7 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 
 		}
 
-		turell.ToDie(pl, turell);
+		turell.ToDie(pl, turell, hp);
 		if (pl.ItPl.second == 0) {
 			system("cls");
 			SetConsoleTextAttribute(hand, Purple);
@@ -66,15 +69,15 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 	}
 	
 } 
-void  Turell::ToDie(Player& pl, Turell tl) {
+void  Turell::ToDie(Player& pl, Turell tl, HealPoint& hp) {
 	if (pl.ItPl.first) {
 		for (size_t i = 0; i < tl.coord_bulet_turell.size(); i++)
 		{
 			if (pl.PlayerCoord.Y == tl.coord_bulet_turell[i].first.Y && pl.PlayerCoord.X == tl.coord_bulet_turell[i].first.X) {
-				
+				--hp.HP.second;
+			}
+			if (hp.HP.second == 0) {
 				pl.ItPl.second = 0;
-				
-
 			}
 		}
 		
