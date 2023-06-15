@@ -31,10 +31,14 @@ bool barriaRIGHT(COORD cursorCoord, vector<vector <char>> vec) {
 }
 bool boxPlayer = false;
 void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& b,COORD cursorCoordi, Box &box, COORD& boxcursorCoord, Tocen& tn) {
-
+    CONSOLE_CURSOR_INFO cci;
+    GetConsoleCursorInfo(hand, &cci);
+    cci.bVisible = false;
+    GetConsoleCursorInfo(hand, &cci);
     switch (_getch())
     {
     case 'w':
+    case 'W':
         if (barriaUP(COORD{ cursorCoord.X, cursorCoord.Y }, vec, boxcursorCoord))
         {
             SetConsoleCursorPosition(hand, cursorCoord);
@@ -46,6 +50,7 @@ void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& 
         }
         break;
     case 's':
+    case 'S':
         if (barriaDOWN(COORD{ cursorCoord.X, cursorCoord.Y }, vec))
         {
 
@@ -60,6 +65,7 @@ void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& 
         }
         break;
     case 'a':
+    case 'A':
 
         if (barriaLEFT(COORD{ cursorCoord.X, cursorCoord.Y }, vec))
         {
@@ -76,6 +82,7 @@ void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& 
         
         break;
     case 'd':
+    case 'D':
 
         if (barriaRIGHT(COORD{ cursorCoord.X, cursorCoord.Y }, vec))
         {
@@ -90,6 +97,7 @@ void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& 
             break;
         }
     case'e':
+    case'E':
         if (cursorCoord.Y == box.Y && cursorCoord.X == box.X) {
             b = ' ';
             box.logicBOX(boxPlayer);
@@ -108,6 +116,7 @@ void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& 
         
         break;
     case'q':
+    case'Q':
         if (cursorCoord.Y == tn.TocenCOOrd.Y && cursorCoord.X == tn.TocenCOOrd.X) {
             tn.tocen++;
             tn.gelocation(tn, vec);

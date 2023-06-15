@@ -1,6 +1,7 @@
 #include"Header.h"
 void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp) {
     tur.shot(tur, vec, tur, *pl, *hp);
+
 }
 int main() {
     Box b;
@@ -13,9 +14,12 @@ int main() {
     vector<vector <char>> vec;
     vecFILL(vec);
     char box = char(219);
-    
+  
     vecRead(vec, turell, hp);
-    
+    CONSOLE_CURSOR_INFO cci;
+        GetConsoleCursorInfo(hand, &cci);
+        cci.bVisible = false;
+        GetConsoleCursorInfo(hand, &cci);
     COORD boxcursCoord{ b.Y,b.X };
     SetConsoleCursorPosition(hand, pl.PlayerCoord);
     tn.gelocation(tn, vec);
@@ -24,7 +28,7 @@ int main() {
 
     while (true)
     {
-   
+        
         if (_kbhit()) {
             pl.ItPl.first = 1;
 

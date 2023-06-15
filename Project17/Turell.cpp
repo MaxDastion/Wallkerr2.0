@@ -2,14 +2,20 @@
 void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl, HealPoint& hp) {
 	
 	while (true)
+
 	{
+		Sleep(50);
+		CONSOLE_CURSOR_INFO cci;
+		GetConsoleCursorInfo(hand, &cci);
+		cci.bVisible = false;
+		GetConsoleCursorInfo(hand, &cci);
 		hp.Redering_HP(hp);
 		for (size_t i = 0; i < turell.coord_bulet_turell.size(); i++)
 		{
 			
 			if (turell.coord_bulet_turell[i].second == false) {
 
-  				Sleep(50);
+  				
 			
 				--turell.coord_bulet_turell[i].first.X;
 				if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X] == '#') {
@@ -75,6 +81,10 @@ void  Turell::ToDie(Player& pl, Turell tl, HealPoint& hp) {
 		{
 			if (pl.PlayerCoord.Y == tl.coord_bulet_turell[i].first.Y && pl.PlayerCoord.X == tl.coord_bulet_turell[i].first.X) {
 				--hp.HP.second;
+				hp.space++;
+				SetConsoleCursorPosition(hand, pl.PlayerCoord);
+				SetConsoleTextAttribute(hand, DarkBlue);
+				cout << '@';
 			}
 			if (hp.HP.second == 0) {
 				pl.ItPl.second = 0;

@@ -41,7 +41,7 @@ public:
 	COORD Coord_redering_HP;
 	void HealLogik();
 	void Redering_HP(HealPoint hp);
-
+	int space = 0;
 };
 class Box
 {
