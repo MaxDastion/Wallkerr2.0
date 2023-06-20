@@ -3,7 +3,9 @@ void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp) {
     tur.shot(tur, vec, tur, *pl, *hp);
 
 }
+     std::unique_lock<std::mutex> lk(cv_m);
 int main() {
+
     Box b;
     Turell turell;
     Player pl;
@@ -23,11 +25,15 @@ int main() {
     COORD boxcursCoord{ b.Y,b.X };
     SetConsoleCursorPosition(hand, pl.PlayerCoord);
     tn.gelocation(tn, vec);
-    thread th(tempest, turell, vec,&pl, &hp);
-    th.detach();
+    
 
     while (true)
     {
+        
+        thread th(tempest, turell, vec, &pl, &hp);
+        th.detach();
+        pl.trac_control = true;
+        cv.wait_for(lk, 1000ms);
         
         if (_kbhit()) {
             pl.ItPl.first = 1;

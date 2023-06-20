@@ -1,77 +1,83 @@
 #include"Header.h"
 void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl, HealPoint& hp) {
-	
-	while (true)
-
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 	{
-		Sleep(50);
-		CONSOLE_CURSOR_INFO cci;
-		GetConsoleCursorInfo(hand, &cci);
-		cci.bVisible = false;
-		GetConsoleCursorInfo(hand, &cci);
-		hp.Redering_HP(hp);
-		for (size_t i = 0; i < turell.coord_bulet_turell.size(); i++)
+		std::lock_guard<std::mutex> lk(cv_m);
+		while (pl.trac_control)
+
 		{
 			
-			if (turell.coord_bulet_turell[i].second == false) {
+			Sleep(100);
+			CONSOLE_CURSOR_INFO cci;
+			GetConsoleCursorInfo(hand, &cci);
+			cci.bVisible = false;
+			GetConsoleCursorInfo(hand, &cci);
+			hp.Redering_HP(hp);
+			for (size_t i = 0; i < turell.coord_bulet_turell.size(); i++)
+			{
 
-  				
-			
-				--turell.coord_bulet_turell[i].first.X;
-				if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X] == '#') {
-					
-					SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X+1, turell.coord_bulet_turell[i].first.Y});
+				if (turell.coord_bulet_turell[i].second == false) {
+
+
+
+					--turell.coord_bulet_turell[i].first.X;
+					if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X] == '#') {
+
+						SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X + 1, turell.coord_bulet_turell[i].first.Y });
+						cout << ' ';
+						SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
+						turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X - 1;
+					}
+
+					SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+
+					SetConsoleTextAttribute(hand, White);
+					cout << turell.char_bulet_turell;
+
 					cout << ' ';
-					SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
-					turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X-1;
+
+
 				}
-				
-				SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+				if (turell.coord_bulet_turell[i].second == true) {
 
-				SetConsoleTextAttribute(hand, White);
-				cout << turell.char_bulet_turell;
+					Sleep(50);
 
-				cout << ' ';
-				
+					++turell.coord_bulet_turell[i].first.X;
+					SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
+					if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X + 1] == '#') {
+
+						SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X - 1, turell.coord_bulet_turell[i].first.Y });
+						cout << ' ';
+						cout << ' ';
+						SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
+						turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X + 1;
+					}
+
+
+					SetConsoleTextAttribute(hand, White);
+					cout << ' ';
+					cout << turell.char_bulet_turell;
+
+
+
+
+
+				}
 
 			}
-			if (turell.coord_bulet_turell[i].second == true) {
-
-  				Sleep(50);
 			
-				++turell.coord_bulet_turell[i].first.X;
-				SetConsoleCursorPosition(hand, turell.coord_bulet_turell[i].first);
-				if (vec[turell.coord_bulet_turell[i].first.Y][turell.coord_bulet_turell[i].first.X+1] == '#') {
-					
-					SetConsoleCursorPosition(hand, { turell.coord_bulet_turell[i].first.X-1, turell.coord_bulet_turell[i].first.Y});
-					cout << ' ';
-					cout << ' ';
-					SetConsoleCursorPosition(hand, { turelli.coord_bulet_turell[i].first.X, turell.coord_bulet_turell[i].first.Y });
-					turell.coord_bulet_turell[i].first.X = turelli.coord_bulet_turell[i].first.X+1;
-				}
-				
-				
-				SetConsoleTextAttribute(hand, White);
-				cout << ' ';
-				cout << turell.char_bulet_turell;
-				
-
-				
-				
-
+			turell.ToDie(pl, turell, hp);
+			if (pl.ItPl.second == 0) {
+				system("cls");
+				SetConsoleTextAttribute(hand, Purple);
+				cout << "You die";
+				Sleep(500);
+				break;
 			}
-
+			pl.trac_control = false;
+			cv.notify_all();
 		}
 
-		turell.ToDie(pl, turell, hp);
-		if (pl.ItPl.second == 0) {
-			system("cls");
-			SetConsoleTextAttribute(hand, Purple);
-			cout << "You die";
-			Sleep(500);
-			break;
-		}
-		
 	}
 	
 } 

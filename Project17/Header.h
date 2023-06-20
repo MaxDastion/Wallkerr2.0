@@ -8,11 +8,15 @@
 #include <fstream>
 #include <string>
 #include <thread>
+#include <mutex>
+#include <math.h>
 
 static HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
 using namespace std;
+static condition_variable cv;
+static mutex cv_m;
 
 enum Collor
 {
@@ -66,6 +70,7 @@ public:
 	COORD PlayerCoord{ 10,10 };
 	char charpl = '@';
 	pair<bool, bool> ItPl{0,1};
+	bool trac_control = true;
 
 };
 
