@@ -32,10 +32,9 @@ int main() {
         
         thread th(tempest, turell, vec, &pl, &hp);
         th.detach();
-        pl.trac_control = true;
-        cv.wait_for(lk, 1000ms);
+        cv.wait_for(lk, 1ms);
         
-        if (_kbhit()) {
+        if (_kbhit() and pl.trac_control) {
             pl.ItPl.first = 1;
 
             SetConsoleCursorPosition(hand, tn.TocenCOOrd);
@@ -68,6 +67,7 @@ int main() {
             break;
 
         }
+        pl.trac_control = false;
        
     }
    

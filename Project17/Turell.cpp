@@ -3,7 +3,7 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	{
 		std::lock_guard<std::mutex> lk(cv_m);
-		while (pl.trac_control)
+		while (true)
 
 		{
 			
@@ -74,8 +74,8 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 				Sleep(500);
 				break;
 			}
-			pl.trac_control = false;
-			cv.notify_all();
+			pl.trac_control = true;
+			cv.notify_one();
 		}
 
 	}
