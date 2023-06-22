@@ -71,7 +71,7 @@ public:
 	char charpl = '@';
 	pair<bool, bool> ItPl{0,1};
 	bool trac_control = true;
-
+	bool win = 0;
 };
 
 

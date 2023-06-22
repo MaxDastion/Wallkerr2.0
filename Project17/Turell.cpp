@@ -6,8 +6,10 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 		while (true)
 
 		{
+			pl.trac_control = true;
+			cv.notify_all();
 			
-			Sleep(100);
+			Sleep(50);
 			CONSOLE_CURSOR_INFO cci;
 			GetConsoleCursorInfo(hand, &cci);
 			cci.bVisible = false;
@@ -74,8 +76,13 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 				Sleep(500);
 				break;
 			}
-			pl.trac_control = true;
-			cv.notify_one();
+			if (pl.win) {
+				system("cls");
+				cout << "You win";
+				Sleep(500);
+					break;
+				
+			}
 		}
 
 	}

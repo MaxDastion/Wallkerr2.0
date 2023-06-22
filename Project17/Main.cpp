@@ -56,10 +56,11 @@ int main() {
             cout << pl.charpl;
             if (tn.tocen == tn.needtocen) {
                 system("cls");
+                pl.win = 1;
                 cout << "You win";
-                if (_kbhit()) {
+                Sleep(500);
                     break;
-                }
+                
             }
         }
         if (pl.ItPl.second == 0) {

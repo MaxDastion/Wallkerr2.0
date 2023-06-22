@@ -7,7 +7,7 @@ void Box::logicBOX(bool& boxPlayer) {
 }
 void Tocen::WhyNeedToken(Tocen& tn) {
     srand(time(NULL));
-    tn.needtocen = rand() % 43 + 5;
+    tn.needtocen = rand() % 5;
 }
 
 
