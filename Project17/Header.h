@@ -106,7 +106,7 @@ public:
 void upravPlayer(COORD& cursorCoord, vector<vector <char>> vec, char& pl, char& b, COORD cursorCoordi, Box &box, COORD& boxcursorCoord, Tocen& tn);
 void vecRead(vector<vector <char>> vec, Turell& turell, HealPoint& hp);
 void vecFILL(vector<vector <char>>& vec);
-
+void Men();
 bool barriaUP(COORD cursorCoord, vector<vector <char>> vec, COORD boxcursorCoord);
 bool barriaDOWN(COORD cursorCoord, vector<vector <char>> vec);
 bool barriaLEFT(COORD cursorCoord, vector<vector <char>> vec);

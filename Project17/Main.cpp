@@ -6,6 +6,7 @@ void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp) {
      std::unique_lock<std::mutex> lk(cv_m);
 int main() {
 
+    Men();
     Box b;
     Turell turell;
     Player pl;
@@ -16,7 +17,6 @@ int main() {
     vector<vector <char>> vec;
     vecFILL(vec);
     char box = char(219);
-  
     vecRead(vec, turell, hp);
     CONSOLE_CURSOR_INFO cci;
         GetConsoleCursorInfo(hand, &cci);
