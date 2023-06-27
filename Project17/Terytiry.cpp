@@ -5,7 +5,7 @@
 
 
 
-void vecRead(vector<vector <char>> vec, Turell& turell, HealPoint& hp) {
+void vecRead(vector<vector <char>> vec, Turell& turell, HealPoint& hp, spike& sp) {
     SetConsoleTextAttribute(hand, LightRed);
     for (short i = 0; i < vec.size(); i++)
     {
@@ -48,6 +48,11 @@ void vecRead(vector<vector <char>> vec, Turell& turell, HealPoint& hp) {
                 cout << ' ';
                 hp.Coord_redering_HP = { f, i };
 
+            }
+            else if (vec[i][f] == '^') {
+                COORD cd{ f,i };
+                sp.spike_coord.push_back(cd);
+                cout << '^';
             }
             
            

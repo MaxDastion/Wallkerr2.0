@@ -136,6 +136,7 @@
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="spike.cpp" />
     <ClCompile Include="Terytiry.cpp" />
     <ClCompile Include="Turell.cpp" />
   </ItemGroup>

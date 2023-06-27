@@ -1,6 +1,6 @@
 #include"Header.h"
-void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp) {
-    tur.shot(tur, vec, tur, *pl, *hp);
+void tempest(Turell tur, vector<vector<char>> vec, Player* pl, HealPoint* hp, spike* sp) {
+    tur.shot(tur, vec, tur, *pl, *hp, *sp);
 
 }
      std::unique_lock<std::mutex> lk(cv_m);
@@ -8,6 +8,7 @@ int main() {
 
     Men();
     Box b;
+    spike sp;
     Turell turell;
     Player pl;
     Tocen tn;
@@ -17,7 +18,7 @@ int main() {
     vector<vector <char>> vec;
     vecFILL(vec);
     char box = char(219);
-    vecRead(vec, turell, hp);
+    vecRead(vec, turell, hp, sp);
     CONSOLE_CURSOR_INFO cci;
         GetConsoleCursorInfo(hand, &cci);
         cci.bVisible = false;
@@ -30,7 +31,7 @@ int main() {
     while (true)
     {
         
-        thread th(tempest, turell, vec, &pl, &hp);
+        thread th(tempest, turell, vec, &pl, &hp, &sp);
         th.detach();
         cv.wait_for(lk, 1ms);
         

@@ -1,12 +1,19 @@
 #include"Header.h"
-void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl, HealPoint& hp) {
+void tempest(spike* sp, bool* df, Player pl) {
+	sp->log_sp(*sp, *df, pl);
+}
+void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Player& pl, HealPoint& hp, spike& sp) {
+	bool jk;
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	{
 		std::lock_guard<std::mutex> lk(cv_m);
 		while (true)
 
 		{
+			thread th(tempest, &sp, &jk, pl);
+			th.detach();
 			pl.trac_control = true;
+			jk = true;
 			cv.notify_all();
 			
 			Sleep(50);
@@ -68,7 +75,7 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 
 			}
 			
-			turell.ToDie(pl, turell, hp);
+			turell.ToDie(pl, turell, hp, sp);
 			if (pl.ItPl.second == 0) {
 				system("cls");
 				SetConsoleTextAttribute(hand, Purple);
@@ -84,11 +91,11 @@ void Turell::shot(Turell turell,vector <vector<char>> vec, Turell turelli, Playe
 				
 			}
 		}
-
+		return;
 	}
 	
 } 
-void  Turell::ToDie(Player& pl, Turell tl, HealPoint& hp) {
+void  Turell::ToDie(Player& pl, Turell tl, HealPoint& hp, spike sp) {
 	if (pl.ItPl.first) {
 		for (size_t i = 0; i < tl.coord_bulet_turell.size(); i++)
 		{
@@ -102,6 +109,16 @@ void  Turell::ToDie(Player& pl, Turell tl, HealPoint& hp) {
 			if (hp.HP.second == 0) {
 				pl.ItPl.second = 0;
 			}
+		}
+		for (size_t i = 0; i < sp.spike_coord.size(); i++) {
+			if (pl.PlayerCoord.Y == sp.spike_coord[i].Y && pl.PlayerCoord.X == sp.spike_coord[i].X && sp.trac_upSP) {
+				--hp.HP.second;
+				hp.space++;
+				SetConsoleCursorPosition(hand, pl.PlayerCoord);
+				SetConsoleTextAttribute(hand, DarkBlue);
+				cout << '@';
+			}
+
 		}
 		
 	}
